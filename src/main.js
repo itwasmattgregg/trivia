@@ -3,11 +3,19 @@ import VueFirestore from 'vue-firestore';
 import App from "./App.vue";
 import router from "./router";
 
+import {auth} from './firebase';
+
 Vue.config.productionTip = false;
 
 Vue.use(VueFirestore);
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount("#app");
+let app = '';
+
+auth.onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      router,
+      render: h => h(App)
+    }).$mount("#app");
+  }
+});
