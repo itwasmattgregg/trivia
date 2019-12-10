@@ -5,7 +5,7 @@ import Admin from "../views/Admin.vue";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 
-import {auth} from '../firebase';
+import { auth } from "../firebase";
 
 Vue.use(VueRouter);
 
@@ -40,8 +40,8 @@ router.beforeEach((to, from, next) => {
   const currentUser = auth.currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  if (requiresAuth && !currentUser) next('login');
+  if (requiresAuth && !currentUser) next("login");
   else next();
-})
+});
 
 export default router;

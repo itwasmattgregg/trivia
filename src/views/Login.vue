@@ -7,34 +7,36 @@
 </template>
 
 <script>
-import {auth} from '../firebase';
+import { auth } from "../firebase";
 
 export default {
   name: "login",
   data() {
     return {
-      email: '',
-      password: '',
-    }
+      email: "",
+      password: ""
+    };
   },
   created() {
-    if(auth.currentUser) {
-      this.$router.push('admin');
+    if (auth.currentUser) {
+      this.$router.push("admin");
     }
   },
   methods: {
     signin() {
-      auth.signInWithEmailAndPassword(this.email, this.password).then(user => {
-          console.log(user, 'success');
-          this.$router.push('admin')
-        }
-      ).catch(function(error) {
-        // Handle Errors here.
-        console.log(error)
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
-        // ...
-      });
+      auth
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          console.log(user, "success");
+          this.$router.push("admin");
+        })
+        .catch(function(error) {
+          // Handle Errors here.
+          console.log(error);
+          // var errorCode = error.code;
+          // var errorMessage = error.message;
+          // ...
+        });
     }
   }
 };
