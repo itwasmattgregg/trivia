@@ -13,10 +13,14 @@
 @tailwind utilities;
 
 #app {
+  display: flex;
+  justify-content: center;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  background: #000;
+  color: #fff;
+
+  min-height: 100vh;
 }
 </style>
