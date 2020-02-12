@@ -19,7 +19,7 @@ export default {
   },
   created() {
     if (auth.currentUser) {
-      this.$router.push("admin");
+      this.$router.push("game-list");
     }
   },
   methods: {
@@ -28,14 +28,13 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
           console.log(user, "success");
-          this.$router.push("admin");
+          this.$router.push("game-list");
         })
         .catch(function(error) {
           // Handle Errors here.
           console.log(error);
           // var errorCode = error.code;
           // var errorMessage = error.message;
-          // ...
         });
     }
   }

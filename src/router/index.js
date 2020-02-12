@@ -1,8 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Admin from "../views/Admin.vue";
+import Admin from "../views/admin/Admin.vue";
 import Home from "../views/Home.vue";
+import GameList from "../views/admin/GameList.vue";
+import AddQuestion from "../views/AddQuestion.vue";
+import AddTeam from "../views/AddTeam.vue";
 import Login from "../views/Login.vue";
 
 import { auth } from "../firebase";
@@ -16,9 +19,33 @@ const routes = [
     component: Home
   },
   {
-    path: "/admin",
-    name: "admin",
+    path: "/game-list",
+    name: "game-list",
+    component: GameList,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/game/:id",
+    name: "game",
     component: Admin,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/game/:id/add-question",
+    name: "add-question",
+    component: AddQuestion,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/game/:id/add-team",
+    name: "add-team",
+    component: AddTeam,
     meta: {
       requiresAuth: true
     }
