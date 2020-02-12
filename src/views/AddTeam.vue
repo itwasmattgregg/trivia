@@ -16,8 +16,12 @@
       </div>
       <div class="flex items-center justify-center">
         <button
-          class="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          :class="
+            `bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline
+            ${team.length === 0 && 'opacity-50'}`
+          "
           type="button"
+          :disabled="team.length === 0"
           @click="addTeam"
         >
           Add Team
