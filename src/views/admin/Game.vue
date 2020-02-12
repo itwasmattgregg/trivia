@@ -22,7 +22,7 @@
             v-for="question in questions"
             :key="question['.key']"
             @click="initQuestion(question['.key'])"
-            class="p-4 h-32 bg-blue shadow-lg rounded flex items-center justify-center text-xl"
+            class="p-4 h-32 bg-blue shadow-lg rounded flex items-center justify-center text-xl font-bold"
           >
             {{ question.question }}
           </button>
@@ -57,7 +57,7 @@ export default {
       teams: db
         .collection("Games")
         .doc(this.$route.params.id)
-        .collection("Contestants"),
+        .collection("Teams"),
       questions: db
         .collection("Games")
         .doc(this.$route.params.id)

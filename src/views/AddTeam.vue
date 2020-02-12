@@ -46,7 +46,7 @@ export default {
       teams: db
         .collection("Games")
         .doc(this.$route.params.id)
-        .collection("Contestants")
+        .collection("Teams")
     };
   },
   methods: {
