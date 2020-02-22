@@ -1,12 +1,18 @@
 <template>
-  <div>
+  <div class="container mx-auto px-4 mt-4">
     <Game
       v-if="current.matches('waiting')"
       v-on:question-clicked="initQuestion"
     />
-    <Question v-if="current.matches('question')" />
-    <Voting v-if="current.matches('voting')" />
-    <Scoring v-if="current.matches('scoring')" />
+    <div class="flex items-center justify-center min-h-full">
+      <Question
+        v-if="current.matches('question')"
+        :activeQuestion="currentGame.active_question"
+        v-on:everyone-answered="gameService.send('TOGGLE')"
+      />
+      <Voting v-if="current.matches('voting')" />
+      <Scoring v-if="current.matches('scoring')" />
+    </div>
   </div>
 </template>
 
@@ -19,6 +25,7 @@ import Question from "./Question.vue";
 import Voting from "./Voting.vue";
 import Scoring from "./Scoring.vue";
 
+// TODO: change question back to going to scores
 const gameMachine = Machine({
   id: "toggle",
   initial: "waiting",
@@ -27,7 +34,7 @@ const gameMachine = Machine({
       on: { TOGGLE: "question" }
     },
     question: {
-      on: { TOGGLE: "voting" }
+      on: { TOGGLE: "waiting" }
     },
     voting: {
       on: { TOGGLE: "scores" }
