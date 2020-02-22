@@ -53,7 +53,10 @@ export default {
     addTeam: function() {
       this.$firestore.teams
         .add({
-          team_name: this.team
+          team_name: this.team,
+          hash: Math.random()
+            .toString(36)
+            .substr(2, 6)
         })
         .then(() => {
           this.$router.push({

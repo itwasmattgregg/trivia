@@ -7,6 +7,7 @@ import GameList from "../views/admin/GameList.vue";
 import AddQuestion from "../views/AddQuestion.vue";
 import AddTeam from "../views/AddTeam.vue";
 import Login from "../views/Login.vue";
+import Player from "../views/player/Player.vue";
 
 import { auth } from "../firebase";
 
@@ -49,6 +50,11 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: "/game/:gameId/player/:playerId",
+    name: "player",
+    component: Player
   },
   {
     path: "/login",
