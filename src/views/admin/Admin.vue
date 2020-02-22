@@ -1,9 +1,12 @@
 <template>
   <div>
-    <button v-on:click="send('TOGGLE')">
-      {{ current.matches("inactive") ? "Off" : "On" }}
-    </button>
-    <Game v-if="current.matches('inactive')" />
+    <Game
+      v-if="current.matches('waiting')"
+      v-on:question-clicked="initQuestion"
+    />
+    <Question v-if="current.matches('question')" />
+    <Voting v-if="current.matches('voting')" />
+    <Scoring v-if="current.matches('scoring')" />
   </div>
 </template>
 
@@ -12,49 +15,72 @@ import { db } from "../../firebase";
 import { Machine, interpret } from "xstate";
 
 import Game from "./Game.vue";
+import Question from "./Question.vue";
+import Voting from "./Voting.vue";
+import Scoring from "./Scoring.vue";
 
-const toggleMachine = Machine({
+const gameMachine = Machine({
   id: "toggle",
-  initial: "inactive",
+  initial: "waiting",
   states: {
-    inactive: {
-      on: { TOGGLE: "active" }
+    waiting: {
+      on: { TOGGLE: "question" }
     },
-    active: {
-      on: { TOGGLE: "inactive" }
+    question: {
+      on: { TOGGLE: "voting" }
+    },
+    voting: {
+      on: { TOGGLE: "scores" }
+    },
+    scores: {
+      on: { TOGGLE: "waiting" }
     }
   }
 });
 
 export default {
   name: "Admin",
-  components: { Game },
+  components: { Game, Voting, Question, Scoring },
   created() {
     // Start service on component creation
-    this.toggleService
+    this.gameService
       .onTransition(state => {
         this.current = state;
+
+        // keep firestore up to date with current game state
+        this.$firestore.currentGame.set(
+          { state: state.value },
+          { merge: true }
+        );
       })
       .start();
   },
   data() {
     return {
-      games: null,
+      currentGame: null,
       // Interpret machine and store it in data
-      toggleService: interpret(toggleMachine),
+      gameService: interpret(gameMachine),
       // Start with machine's initial state
-      current: toggleMachine.initialState
+      current: gameMachine.initialState
     };
   },
   firestore() {
     return {
-      games: db.collection("Games")
+      currentGame: db.collection("Games").doc(this.$route.params.id)
     };
   },
   methods: {
     // Send events to the service
     send(event) {
-      this.toggleService.send(event);
+      this.gameService.send(event);
+    },
+    initQuestion(questionKey) {
+      this.gameService.send("TOGGLE");
+
+      this.$firestore.currentGame.set(
+        { active_question: questionKey },
+        { merge: true }
+      );
     }
   }
 };

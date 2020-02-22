@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-4">
     <div class="grid gap-4 grid-cols-4">
       <div class="teams rounded shadow-lg bg-white p-4 relative">
         <h2 class="text-xl mb-4">Scores</h2>
@@ -46,12 +46,6 @@ import { db } from "../../firebase";
 
 export default {
   name: "Game",
-  data() {
-    return {
-      teams: [],
-      questions: []
-    };
-  },
   firestore() {
     return {
       teams: db
@@ -63,12 +57,11 @@ export default {
         .doc(this.$route.params.id)
         .collection("Questions")
     };
+  },
+  methods: {
+    initQuestion(key) {
+      this.$emit("question-clicked", key);
+    }
   }
 };
 </script>
-
-<style lang="postcss" scoped>
-.layout {
-  display: grid;
-}
-</style>

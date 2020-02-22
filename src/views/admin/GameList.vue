@@ -2,7 +2,7 @@
   <div>
     <h1 class="text-2xl">Game List</h1>
     <router-link
-      :to="{ name: 'game', params: { id: game['.key'] } }"
+      :to="{ name: 'admin', params: { id: game['.key'] } }"
       v-for="game in games"
       :key="game['.key']"
     >

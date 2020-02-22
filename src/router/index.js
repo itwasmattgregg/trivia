@@ -28,7 +28,7 @@ const routes = [
   },
   {
     path: "/game/:id",
-    name: "game",
+    name: "admin",
     component: Admin,
     meta: {
       requiresAuth: true

@@ -59,7 +59,7 @@ export default {
         })
         .then(() => {
           this.$router.push({
-            name: "game",
+            name: "admin",
             params: { id: this.$route.params.id }
           });
         });
