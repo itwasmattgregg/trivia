@@ -64,7 +64,6 @@ export default {
   },
   data() {
     return {
-      currentGame: null,
       // Interpret machine and store it in data
       gameService: interpret(gameMachine),
       // Start with machine's initial state
@@ -82,12 +81,11 @@ export default {
       this.gameService.send(event);
     },
     initQuestion(questionKey) {
-      this.gameService.send("TOGGLE");
-
-      this.$firestore.currentGame.set(
-        { active_question: questionKey },
-        { merge: true }
-      );
+      this.$firestore.currentGame
+        .set({ active_question: questionKey }, { merge: true })
+        .then(() => {
+          this.gameService.send("TOGGLE");
+        });
     }
   }
 };
