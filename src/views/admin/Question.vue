@@ -63,7 +63,7 @@ export default {
   watch: {
     answers() {
       // Make sure there are teams loaded before checking this... it fires on load
-      if (this.teams > 0 && this.answers.length === this.teams.length) {
+      if (this.teams.length > 0 && this.answers.length === this.teams.length) {
         this.$emit("everyone-answered");
         // TODO: maybe remove this and just calculate it every time from admin??
         this.$firestore.question.set({ answered: true }, { merge: true });

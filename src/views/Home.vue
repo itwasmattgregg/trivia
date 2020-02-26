@@ -63,6 +63,7 @@ export default {
         .where("hash", "==", this.teamHash);
 
       teams.get().then(querySnapshot => {
+        // If the query didn't find anything
         if (querySnapshot.empty) {
           this.errorMessage = "That's not a valid team ID...";
 
@@ -73,16 +74,16 @@ export default {
           }
         } else {
           let gameId = "";
-          let playerId = "";
+          let teamId = "";
 
           querySnapshot.forEach(function(doc) {
             gameId = doc.ref.parent.parent.id;
-            playerId = doc.id;
+            teamId = doc.id;
           });
 
           this.$router.push({
             name: "player",
-            params: { gameId, playerId }
+            params: { gameId, teamId }
           });
         }
       });
