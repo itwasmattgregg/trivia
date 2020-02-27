@@ -46,6 +46,21 @@ export default {
       submitted: false
     };
   },
+  created() {
+    // Check if answer has been submitted already
+    db.collection("Games")
+      .doc(this.$route.params.gameId)
+      .collection("Questions")
+      .doc(this.activeQuestion)
+      .collection("Answers")
+      .doc(this.teamId)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          this.submitted = true;
+        }
+      });
+  },
   firestore() {
     return {
       question: db

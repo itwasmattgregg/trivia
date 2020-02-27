@@ -10,8 +10,12 @@
         :activeQuestion="currentGame.active_question"
         v-on:everyone-answered="gameService.send('TOGGLE')"
       />
-      <Voting v-if="current.matches('voting')" />
-      <Scoring v-if="current.matches('scoring')" />
+      <Voting
+        v-if="current.matches('voting')"
+        :activeQuestion="currentGame.active_question"
+        v-on:everyone-voted="gameService.send('TOGGLE')"
+      />
+      <Scoring v-if="current.matches('scores')" />
     </div>
   </div>
 </template>
@@ -34,7 +38,7 @@ const gameMachine = Machine({
       on: { TOGGLE: "question" }
     },
     question: {
-      on: { TOGGLE: "waiting" }
+      on: { TOGGLE: "voting" }
     },
     voting: {
       on: { TOGGLE: "scores" }
@@ -76,10 +80,6 @@ export default {
     };
   },
   methods: {
-    // Send events to the service
-    send(event) {
-      this.gameService.send(event);
-    },
     initQuestion(questionKey) {
       this.$firestore.currentGame
         .set({ active_question: questionKey }, { merge: true })

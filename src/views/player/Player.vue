@@ -10,6 +10,11 @@
         :activeQuestion="currentGame.active_question"
         :teamId="$route.params.teamId"
       />
+      <PlayerVote
+        v-else-if="currentGame.state === 'voting'"
+        :activeQuestion="currentGame.active_question"
+        :teamId="$route.params.teamId"
+      />
       <div v-else>
         Looks like your game master hasn't set up the game yet! Oops
       </div>
@@ -20,13 +25,15 @@
 <script>
 import { db } from "../../firebase";
 import QuestionAnswer from "./QuestionAnswer.vue";
+import PlayerVote from "./PlayerVote.vue";
 
 // TODO: Add a way better loading state
 
 export default {
   name: "player",
   components: {
-    QuestionAnswer
+    QuestionAnswer,
+    PlayerVote
   },
   data() {
     return {
