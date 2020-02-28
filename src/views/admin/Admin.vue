@@ -15,7 +15,7 @@
         :activeQuestion="currentGame.active_question"
         v-on:everyone-voted="gameService.send('TOGGLE')"
       />
-      <Scoring v-if="current.matches('scores')" />
+      <Scoring v-if="current.matches('scoring')" />
     </div>
   </div>
 </template>
@@ -41,9 +41,9 @@ const gameMachine = Machine({
       on: { TOGGLE: "voting" }
     },
     voting: {
-      on: { TOGGLE: "scores" }
+      on: { TOGGLE: "scoring" }
     },
-    scores: {
+    scoring: {
       on: { TOGGLE: "waiting" }
     }
   }

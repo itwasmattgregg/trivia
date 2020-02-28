@@ -3,7 +3,7 @@
     <div class="flex items-center justify-center min-h-full text-center">
       <div class="team-name">{{ currentTeam.team_name }}</div>
       <div class="text-2xl" v-if="currentGame.state === 'waiting'">
-        Hi there. We're waiting for the game to start!
+        Hi there. Please wait for the next question.
       </div>
       <QuestionAnswer
         v-else-if="currentGame.state === 'question'"
@@ -15,6 +15,7 @@
         :activeQuestion="currentGame.active_question"
         :teamId="$route.params.teamId"
       />
+      <div v-else-if="currentGame.state === 'scoring'"></div>
       <div v-else>
         Looks like your game master hasn't set up the game yet! Oops
       </div>
