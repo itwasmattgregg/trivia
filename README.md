@@ -1,4 +1,5 @@
 # nerdy-autocomplete
+![Build and Deploy](https://github.com/JimSchofield/nerdery-autocomplete/workflows/Build%20and%20Deploy/badge.svg)
 
 ## Project setup
 ```
