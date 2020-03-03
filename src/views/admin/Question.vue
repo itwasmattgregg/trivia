@@ -66,6 +66,8 @@ export default {
       if (this.teams.length > 0 && this.answers.length === this.teams.length) {
         this.$emit("everyone-answered");
         // TODO: maybe remove this and just calculate it every time from admin??
+        // Once everyone has answer the question becomes locked so it can never
+        // be clicked again.
         this.$firestore.question.set({ answered: true }, { merge: true });
       }
     }
