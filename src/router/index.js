@@ -4,9 +4,10 @@ import VueRouter from "vue-router";
 import Admin from "../views/admin/Admin.vue";
 import Home from "../views/Home.vue";
 import GameList from "../views/admin/GameList.vue";
-import AddQuestion from "../views/AddQuestion.vue";
-import AddTeam from "../views/AddTeam.vue";
+import AddQuestion from "../views/admin/AddQuestion.vue";
+import AddTeam from "../views/admin/AddTeam.vue";
 import Login from "../views/Login.vue";
+
 import Player from "../views/player/Player.vue";
 
 import { auth } from "../firebase";

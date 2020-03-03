@@ -5,6 +5,7 @@
       <ul>
         <li v-for="team in teams" :key="team['.key']" class="font-semibold">
           {{ team.team_name }}
+          {{ team.score || "0" }}
         </li>
       </ul>
       <router-link

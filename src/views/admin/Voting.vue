@@ -66,7 +66,6 @@ export default {
       // Make sure there are teams loaded before checking this... it fires on load
       if (this.teams.length > 0 && this.votes.length === this.teams.length) {
         this.$emit("everyone-voted");
-        // Maybe do all the scoring logic here???
       }
     }
   }

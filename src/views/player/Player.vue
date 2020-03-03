@@ -15,7 +15,9 @@
         :activeQuestion="currentGame.active_question"
         :teamId="$route.params.teamId"
       />
-      <div v-else-if="currentGame.state === 'scoring'"></div>
+      <div v-else-if="currentGame.state === 'scoring'">
+        Votes are being scored
+      </div>
       <div v-else>
         Looks like your game master hasn't set up the game yet! Oops
       </div>

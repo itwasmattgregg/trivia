@@ -8,14 +8,18 @@
       <Question
         v-if="current.matches('question')"
         :activeQuestion="currentGame.active_question"
-        v-on:everyone-answered="gameService.send('TOGGLE')"
+        v-on:everyone-answered="gameService.send('NEXT')"
       />
       <Voting
         v-if="current.matches('voting')"
         :activeQuestion="currentGame.active_question"
-        v-on:everyone-voted="gameService.send('TOGGLE')"
+        v-on:everyone-voted="gameService.send('NEXT')"
       />
-      <Scoring v-if="current.matches('scoring')" />
+      <Scoring
+        v-if="current.matches('scoring')"
+        :activeQuestion="currentGame.active_question"
+        v-on:scoring-complete="gameService.send('NEXT')"
+      />
     </div>
   </div>
 </template>
@@ -35,16 +39,16 @@ const gameMachine = Machine({
   initial: "waiting",
   states: {
     waiting: {
-      on: { TOGGLE: "question" }
+      on: { NEXT: "question" }
     },
     question: {
-      on: { TOGGLE: "voting" }
+      on: { NEXT: "voting" }
     },
     voting: {
-      on: { TOGGLE: "scoring" }
+      on: { NEXT: "scoring" }
     },
     scoring: {
-      on: { TOGGLE: "waiting" }
+      on: { NEXT: "waiting" }
     }
   }
 });
@@ -76,15 +80,24 @@ export default {
   },
   firestore() {
     return {
-      currentGame: db.collection("Games").doc(this.$route.params.id)
+      currentGame: db.collection("Games").doc(this.$route.params.id),
+      teams: db
+        .collection("Games")
+        .doc(this.$route.params.id)
+        .collection("Teams")
     };
   },
   methods: {
     initQuestion(questionKey) {
+      // TODO: turn this back on
+      // if (this.teams.length < 3) {
+      //   console.log("You need more than 2 teams to play.");
+      //   return;
+      // }
       this.$firestore.currentGame
         .set({ active_question: questionKey }, { merge: true })
         .then(() => {
-          this.gameService.send("TOGGLE");
+          this.gameService.send("NEXT");
         });
     }
   }
