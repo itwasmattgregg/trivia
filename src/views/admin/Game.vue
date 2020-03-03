@@ -52,7 +52,8 @@ export default {
       teams: db
         .collection("Games")
         .doc(this.$route.params.id)
-        .collection("Teams"),
+        .collection("Teams")
+        .orderBy("score", "desc"),
       questions: db
         .collection("Games")
         .doc(this.$route.params.id)
