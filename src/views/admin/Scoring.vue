@@ -10,7 +10,13 @@
       {{ team.team_name }} -
       {{ team.score }}
     </div>
-    <button @click="$emit('scoring-complete')">Back to question list</button>
+    <button
+      class="bg-blue hover:bg-blue-700 font-bold mt-8 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      type="button"
+      @click="$emit('scoring-complete')"
+    >
+      Back to question list
+    </button>
   </div>
 </template>
 
