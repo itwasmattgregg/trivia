@@ -68,7 +68,7 @@ export default {
         // TODO: maybe remove this and just calculate it every time from admin??
         // Once everyone has answer the question becomes locked so it can never
         // be clicked again.
-        this.$firestore.question.set({ answered: true }, { merge: true });
+        // this.$firestore.question.set({ answered: true }, { merge: true });
       }
     }
   }
