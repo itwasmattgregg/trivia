@@ -70,21 +70,23 @@ export default {
 
         // For each vote give points to team voted for
         snapshot.forEach(doc => {
-          const teamToScore = doc.data().teamId;
+          const teamToScore = doc.data().answerId;
           const currentScore = this.scoreChangesThisRound[teamToScore] ?? 0;
 
           this.scoreChangesThisRound[teamToScore] = currentScore + 10;
-
-          const teamRef = this.$firestore.teams.doc(teamToScore);
+        });
+      })
+      .then(() => {
+        Object.keys(this.scoreChangesThisRound).forEach(key => {
+          const teamRef = this.$firestore.teams.doc(key);
 
           teamRef
             .get()
             .then(doc => {
               if (doc.exists) {
-                // If they have a score use that as starting point, otherwise 0
-                const teamScore = doc.data().score ?? 0;
-                console.log(teamScore);
-                teamRef.set({ score: teamScore + 10 }, { merge: true });
+                const teamScore =
+                  doc.data().score + this.scoreChangesThisRound[key];
+                teamRef.set({ score: teamScore }, { merge: true });
               } else {
                 console.log("No such document!");
                 return;

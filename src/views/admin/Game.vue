@@ -3,8 +3,13 @@
     <div class="teams rounded shadow-lg bg-white p-4 relative">
       <h2 class="text-xl mb-4">Scores</h2>
       <ul>
-        <li v-for="team in teams" :key="team['.key']" class="font-semibold">
-          {{ team.team_name }}
+        <li
+          v-for="team in teams"
+          :key="team['.key']"
+          class="team font-semibold"
+        >
+          <span class="team-name">{{ team.team_name }}</span>
+          <span class="team-hash">{{ team.hash }}</span>
           {{ team.score || "0" }}
         </li>
       </ul>
@@ -67,3 +72,19 @@ export default {
   }
 };
 </script>
+
+<style lang="postcss" scoped>
+.team {
+  display: flex;
+  justify-content: space-between;
+}
+.team-hash {
+  display: none;
+}
+.team:hover .team-hash {
+  display: inline-block;
+}
+.team:hover .team-name {
+  display: none;
+}
+</style>
