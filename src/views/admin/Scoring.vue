@@ -12,7 +12,7 @@
       </div>
     </div>
     <button
-      class="bg-blue hover:bg-blue-700 font-bold mt-8 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      class="bg-white border-blue border-solid border-2 hover:bg-blue-700 font-bold mt-8 py-2 px-4 rounded focus:shadow-outline"
       type="button"
       @click="$emit('scoring-complete')"
     >
