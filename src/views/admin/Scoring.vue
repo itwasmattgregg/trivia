@@ -1,10 +1,8 @@
 <template>
   <div>
-    Scoring
-
     <div
-      class="relative p-4 bg-blue shadow-lg rounded flex items-center justify-center font-bold"
-      v-for="team in teams"
+      class="relative p-4 mb-8 bg-blue shadow-lg rounded flex items-center justify-center font-bold"
+      v-for="team in teamsOrdered"
       :key="team.team_name"
     >
       {{ team.team_name }} -
@@ -48,6 +46,11 @@ export default {
         .collection("Games")
         .doc(this.$route.params.id)
         .collection("Teams"),
+      teamsOrdered: db
+        .collection("Games")
+        .doc(this.$route.params.id)
+        .collection("Teams")
+        .orderBy("score", "desc"),
       votes: db
         .collection("Games")
         .doc(this.$route.params.id)
