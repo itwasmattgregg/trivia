@@ -1,6 +1,6 @@
 <template>
   <div class="grid gap-4 grid-cols-4">
-    <div class="teams rounded shadow-lg bg-white p-4 relative">
+    <div class="teams rounded shadow-lg bg-white p-4 pb-12 relative">
       <h2 class="text-xl mb-4">Scores</h2>
       <ul>
         <li
