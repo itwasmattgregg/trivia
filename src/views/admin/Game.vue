@@ -7,6 +7,7 @@
           v-for="team in teams"
           :key="team['.key']"
           class="team font-semibold"
+          tabindex="0"
         >
           <span class="team-name">{{ team.team_name }}</span>
           <span class="team-hash">{{ team.hash }}</span>
@@ -81,10 +82,10 @@ export default {
 .team-hash {
   display: none;
 }
-.team:hover .team-hash {
+.team:focus .team-hash {
   display: inline-block;
 }
-.team:hover .team-name {
+.team:focus .team-name {
   display: none;
 }
 </style>
