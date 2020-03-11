@@ -24,14 +24,14 @@
       <h2 class="text-xl mb-4">Questions</h2>
       <div class="grid gap-4 grid-cols-3">
         <button
-          v-for="question in questions"
+          v-for="(question, index) in questions"
           :key="question['.key']"
           :disabled="question.answered"
           @click="initQuestion(question['.key'])"
           class="p-4 h-32 bg-blue shadow-lg rounded flex items-center justify-center text-xl font-bold"
           :class="{ 'opacity-50': question.answered }"
         >
-          {{ question.question }}
+          {{ index + 1 }}
         </button>
         <router-link
           :to="{ name: 'add-question', params: { id: $route.params.id } }"
