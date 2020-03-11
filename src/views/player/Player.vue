@@ -47,11 +47,19 @@ export default {
   firestore() {
     return {
       currentGame: db.collection("Games").doc(this.$route.params.gameId),
-      currentTeam: db
-        .collection("Games")
-        .doc(this.$route.params.gameId)
-        .collection("Teams")
-        .doc(this.$route.params.teamId)
+      currentTeam: {
+        ref: db
+          .collection("Games")
+          .doc(this.$route.params.gameId)
+          .collection("Teams")
+          .doc(this.$route.params.teamId),
+        reject: err => {
+          console.error(err);
+          this.$router.push({
+            name: "home"
+          });
+        }
+      }
     };
   }
 };
