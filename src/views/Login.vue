@@ -1,8 +1,38 @@
 <template>
   <div>
-    <input type="email" v-model="email" placeholder="Email" />
-    <input type="password" v-model="password" placeholder="Password" />
-    <button @click="signin">Login</button>
+    <form @submit.prevent="signin">
+      <h1 class="text-2xl mb-4">Admin Login</h1>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="team">
+          Email
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="email"
+          v-model="email"
+          type="email"
+          placeholder="jon-doe@nerdery.com"
+        />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="team">
+          Password
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="password"
+          v-model="password"
+          type="password"
+          placeholder="bleep bloop"
+        />
+      </div>
+      <button
+        type="submit"
+        class="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Login
+      </button>
+    </form>
   </div>
 </template>
 
