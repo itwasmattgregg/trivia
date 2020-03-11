@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1 class="text-2xl">Game List</h1>
+    <h1 class="text-2xl mb-8">Game List</h1>
     <router-link
       :to="{ name: 'admin', params: { id: game['.key'] } }"
       v-for="game in games"
       :key="game['.key']"
     >
-      <div class="max-w-sm rounded shadow-lg bg-white">
+      <div class="max-w-sm rounded shadow-lg bg-white mb-4">
         <div class="p-4 text-xl">
           {{ game.name }}
         </div>
