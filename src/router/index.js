@@ -1,14 +1,24 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Admin from "../views/admin/Admin.vue";
-import Home from "../views/Home.vue";
-import GameList from "../views/admin/GameList.vue";
-import AddQuestion from "../views/admin/AddQuestion.vue";
-import AddTeam from "../views/admin/AddTeam.vue";
-import Login from "../views/Login.vue";
+// Admin components
+const Admin = () =>
+  import(/* webpackChunkName: "group-admin" */ "../views/admin/Admin.vue");
+const GameList = () =>
+  import(/* webpackChunkName: "group-admin" */ "../views/admin/GameList.vue");
+const AddQuestion = () =>
+  import(
+    /* webpackChunkName: "group-admin" */ "../views/admin/AddQuestion.vue"
+  );
+const AddTeam = () =>
+  import(/* webpackChunkName: "group-admin" */ "../views/admin/AddTeam.vue");
+const Login = () => import("../views/Login.vue");
 
-import Player from "../views/player/Player.vue";
+// Player components
+const Player = () =>
+  import(/* webpackChunkName: "group-team" */ "../views/player/Player.vue");
+const Home = () =>
+  import(/* webpackChunkName: "group-team" */ "../views/Home.vue");
 
 import { auth } from "../firebase";
 
