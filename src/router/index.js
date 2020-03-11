@@ -53,8 +53,8 @@ const routes = [
     }
   },
   {
-    path: "/game/:gameId/player/:teamId",
-    name: "player",
+    path: "/game/:gameId/team/:teamId",
+    name: "team",
     component: Player
   },
   {

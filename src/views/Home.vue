@@ -82,7 +82,7 @@ export default {
           });
 
           this.$router.push({
-            name: "player",
+            name: "team",
             params: { gameId, teamId }
           });
         }
