@@ -75,7 +75,6 @@ const routes = [
     path: "/logout",
     name: "logout",
     beforeEnter(to, from, next) {
-      console.log("yo");
       auth.signOut().then(() => {
         next("login");
       });
