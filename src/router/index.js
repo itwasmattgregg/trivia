@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { auth } from "../firebase";
 
 // Admin components
 const Admin = () =>
@@ -19,8 +20,6 @@ const Player = () =>
   import(/* webpackChunkName: "group-team" */ "../views/player/Player.vue");
 const Home = () =>
   import(/* webpackChunkName: "group-team" */ "../views/Home.vue");
-
-import { auth } from "../firebase";
 
 Vue.use(VueRouter);
 
@@ -71,6 +70,16 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    beforeEnter(to, from, next) {
+      console.log("yo");
+      auth.signOut().then(() => {
+        next("login");
+      });
+    }
   }
 ];
 
