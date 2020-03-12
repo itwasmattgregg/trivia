@@ -9,6 +9,7 @@
         v-if="current.matches('question')"
         :activeQuestion="currentGame.active_question"
         v-on:everyone-answered="gameService.send('NEXT')"
+        v-on:cancel="gameService.send('CANCEL')"
       />
       <Voting
         v-if="current.matches('voting')"
@@ -42,10 +43,10 @@ const gameMachine = Machine({
       on: { NEXT: "question" }
     },
     question: {
-      on: { NEXT: "voting" }
+      on: { NEXT: "voting", CANCEL: "waiting" }
     },
     voting: {
-      on: { NEXT: "scoring" }
+      on: { NEXT: "scoring", CANCEL: "waiting" }
     },
     scoring: {
       on: { NEXT: "waiting" }
@@ -95,7 +96,12 @@ export default {
       //   return;
       // }
       this.$firestore.currentGame
-        .set({ active_question: questionKey }, { merge: true })
+        .set(
+          {
+            active_question: questionKey
+          },
+          { merge: true }
+        )
         .then(() => {
           this.gameService.send("NEXT");
         });

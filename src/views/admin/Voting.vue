@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ timer }}
     <div class="text-5xl">{{ question.question }}</div>
     <div class="text-2xl">Voting:</div>
     <div
@@ -24,11 +25,19 @@ export default {
   data() {
     return {
       teams: [],
-      votes: []
+      votes: [],
+      timer: 45,
+      interval: null
     };
   },
   firestore() {
     return {
+      game: {
+        ref: db.collection("Games").doc(this.$route.params.id),
+        resolve: () => {
+          this.startTimer();
+        }
+      },
       question: db
         .collection("Games")
         .doc(this.$route.params.id)
@@ -65,8 +74,34 @@ export default {
     votes() {
       // Make sure there are teams loaded before checking this... it fires on load
       if (this.teams.length > 0 && this.votes.length === this.teams.length) {
-        this.$emit("everyone-voted");
+        this.votingCompleted();
       }
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
+  methods: {
+    // Something here to fire when it's all over
+    votingCompleted() {
+      this.$emit("everyone-voted");
+    },
+
+    startTimer() {
+      this.$firestore.game
+        .set({ endTime: new Date(Date.now() + 1000 * 47) }, { merge: true })
+        .then(() => {
+          const end = new Date(this.game.endTime.seconds * 1000);
+          this.interval = setInterval(() => {
+            const now = Date.now();
+
+            if (this.timer > 0) {
+              this.timer = Math.floor((end - now) / 1000);
+            } else {
+              this.votingCompleted();
+            }
+          }, 1000);
+        });
     }
   }
 };

@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ timer }}
     <div class="text-5xl">{{ question.question }}</div>
     <div
       class="team-icon p-4 bg-blue shadow-lg rounded flex items-center justify-center font-bold"
@@ -23,11 +24,19 @@ export default {
   data() {
     return {
       teams: [],
-      answers: []
+      answers: [],
+      timer: 45,
+      interval: null
     };
   },
   firestore() {
     return {
+      game: {
+        ref: db.collection("Games").doc(this.$route.params.id),
+        resolve: () => {
+          this.startTimer();
+        }
+      },
       question: db
         .collection("Games")
         .doc(this.$route.params.id)
@@ -64,12 +73,42 @@ export default {
     answers() {
       // Make sure there are teams loaded before checking this... it fires on load
       if (this.teams.length > 0 && this.answers.length === this.teams.length) {
-        this.$emit("everyone-answered");
-        // TODO: maybe remove this and just calculate it every time from admin??
-        // Once everyone has answer the question becomes locked so it can never
-        // be clicked again.
-        this.$firestore.question.set({ answered: true }, { merge: true });
+        this.questionCompleted();
       }
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
+  methods: {
+    // Something here to fire when it's all over
+    questionCompleted() {
+      // TODO: maybe remove this and just calculate it every time from admin??
+      // Once everyone has answer the question becomes locked so it can never
+      // be clicked again.
+      if (this.answers.length === 0) {
+        this.$emit("cancel");
+      } else {
+        this.$firestore.question.set({ answered: true }, { merge: true });
+        this.$emit("everyone-answered");
+      }
+    },
+
+    startTimer() {
+      this.$firestore.game
+        .set({ endTime: new Date(Date.now() + 1000 * 47) }, { merge: true })
+        .then(() => {
+          const end = new Date(this.game.endTime.seconds * 1000);
+          this.interval = setInterval(() => {
+            const now = Date.now();
+
+            if (this.timer > 0) {
+              this.timer = Math.floor((end - now) / 1000);
+            } else {
+              this.questionCompleted();
+            }
+          }, 1000);
+        });
     }
   }
 };
