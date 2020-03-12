@@ -83,12 +83,12 @@ export default {
   methods: {
     // Something here to fire when it's all over
     questionCompleted() {
-      // TODO: maybe remove this and just calculate it every time from admin??
-      // Once everyone has answer the question becomes locked so it can never
-      // be clicked again.
       if (this.answers.length === 0) {
         this.$emit("cancel");
       } else {
+        // TODO: maybe remove this and just calculate it every time from admin??
+        // Once everyone has answer the question becomes locked so it can never
+        // be clicked again.
         this.$firestore.question.set({ answered: true }, { merge: true });
         this.$emit("everyone-answered");
       }
