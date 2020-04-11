@@ -1,12 +1,15 @@
 <template>
   <div>
     <div
-      class="relative p-4 mb-8 bg-blue shadow-lg rounded flex items-center justify-center font-bold"
+      class="relative p-4 mb-8 mx-4 bg-blue shadow-lg rounded font-bold text-center"
       v-for="team in teamsOrdered"
       :key="team.team_name"
     >
       {{ team.team_name }} -
       {{ team.score }}
+      <div>
+        "{{ answers.find(answer => answer[".key"] === team[".key"]).answer }}"
+      </div>
       <div class="score-change" v-if="scoreChangesThisRound[team['.key']]">
         + {{ scoreChangesThisRound[team[".key"]] }}
       </div>
@@ -59,7 +62,13 @@ export default {
         .doc(this.$route.params.id)
         .collection("Questions")
         .doc(this.activeQuestion)
-        .collection("Votes")
+        .collection("Votes"),
+      answers: db
+        .collection("Games")
+        .doc(this.$route.params.id)
+        .collection("Questions")
+        .doc(this.activeQuestion)
+        .collection("Answers")
     };
   },
   created() {

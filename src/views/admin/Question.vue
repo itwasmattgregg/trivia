@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ timer }}
+    <div class="text-6xl text-blue font-bold text-center">{{ timer }}</div>
     <div class="text-5xl">{{ question.question }}</div>
     <div
       class="team-icon p-4 bg-blue shadow-lg rounded flex items-center justify-center font-bold"
