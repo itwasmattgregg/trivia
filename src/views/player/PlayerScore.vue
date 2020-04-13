@@ -7,9 +7,9 @@
     >
       {{ team.team_name }} -
       {{ team.score }}
-      <div>
+      <!-- <div>
         "{{ answers.find(answer => answer[".key"] === team[".key"]).answer }}"
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

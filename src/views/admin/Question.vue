@@ -25,7 +25,7 @@ export default {
     return {
       teams: [],
       answers: [],
-      timer: 45,
+      timer: 90,
       interval: null
     };
   },
@@ -96,7 +96,7 @@ export default {
 
     startTimer() {
       this.$firestore.game
-        .set({ endTime: new Date(Date.now() + 1000 * 47) }, { merge: true })
+        .set({ endTime: new Date(Date.now() + 1000 * 92) }, { merge: true })
         .then(() => {
           const end = new Date(this.game.endTime.seconds * 1000);
           this.interval = setInterval(() => {
