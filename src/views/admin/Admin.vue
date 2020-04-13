@@ -1,10 +1,13 @@
 <template>
-  <div class="container mx-auto px-4 mt-4">
+  <div class="container mx-auto px-4 mt-4 pb-4">
     <Game
       v-if="current.matches('waiting')"
       v-on:question-clicked="initQuestion"
     />
-    <div class="flex items-center justify-center min-h-full">
+    <div
+      v-if="!current.matches('waiting')"
+      class="flex items-center justify-center min-h-full"
+    >
       <Question
         v-if="current.matches('question')"
         :activeQuestion="currentGame.active_question"

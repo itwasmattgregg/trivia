@@ -14,12 +14,14 @@
           {{ team.score || "0" }}
         </li>
       </ul>
-      <router-link
-        :to="{ name: 'add-team', params: { id: $route.params.id } }"
-        class="rounded-full bg-gray-200 px-4 absolute bottom-0 right-0 m-4"
-      >
-        Add team +
-      </router-link>
+      <div class="text-right">
+        <router-link
+          :to="{ name: 'add-team', params: { id: $route.params.id } }"
+          class="rounded-full bg-gray-200 px-4 inline-blocxk my-4"
+        >
+          Add team +
+        </router-link>
+      </div>
     </div>
     <div class="questions col-span-3 rounded shadow-lg bg-white p-4">
       <h2 class="text-xl mb-4">Questions</h2>
