@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <div class="text-6xl text-blue font-bold text-center">{{ timer }}</div>
+  <div class="text-center">
+    <div class="text-6xl text-blue font-bold">{{ timer }}</div>
     <div class="text-5xl">{{ question.question }}</div>
     <div class="text-2xl">Voting:</div>
     <div
-      class="team-icon p-4 bg-blue shadow-lg rounded flex items-center justify-center font-bold"
+      class="team-icon m-2 p-4 bg-blue shadow-lg rounded inline-flex items-center justify-center font-bold"
       :data-voted="team.voted"
       v-for="team in voted"
       :key="team.name"

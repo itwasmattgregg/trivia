@@ -7,9 +7,9 @@
     >
       {{ team.team_name }} -
       {{ team.score }}
-      <!-- <div>
+      <div v-if="answers.find(answer => answer['.key'] === team['.key'])">
         "{{ answers.find(answer => answer[".key"] === team[".key"]).answer }}"
-      </div> -->
+      </div>
       <div class="score-change" v-if="scoreChangesThisRound[team['.key']]">
         + {{ scoreChangesThisRound[team[".key"]] }}
       </div>
@@ -18,7 +18,7 @@
       </div>
     </div>
     <button
-      class="bg-white border-blue border-solid border-2 hover:bg-blue-700 font-bold mt-8 py-2 px-4 rounded focus:shadow-outline"
+      class="inline-block bg-white border-blue border-solid border-2 hover:bg-blue-700 font-bold mt-8 mx-auto py-2 px-4 rounded focus:shadow-outline"
       type="button"
       @click="$emit('scoring-complete')"
     >

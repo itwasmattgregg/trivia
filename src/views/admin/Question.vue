@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <div class="text-6xl text-blue font-bold text-center">{{ timer }}</div>
+  <div class="text-center">
+    <div class="text-6xl text-blue font-bold">{{ timer }}</div>
     <div class="text-5xl">{{ question.question }}</div>
     <div
-      class="team-icon p-4 bg-blue shadow-lg rounded flex items-center justify-center font-bold"
-      :data-answered="team.answered"
+      class="team-icon p-4 m-2 bg-blue shadow-lg rounded items-center justify-center font-bold"
+      :class="team.answered ? 'inline-flex' : 'hidden'"
       v-for="team in answered"
       :key="team.name"
     >
@@ -114,11 +114,3 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
-.team-icon {
-  display: none;
-}
-.team-icon[data-answered="true"] {
-  display: inline-block;
-}
-</style>

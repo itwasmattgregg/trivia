@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container px-4 mt-16 pb-4">
     <div class="flex items-center justify-center min-h-full text-center">
       <div class="team-name">{{ currentTeam.team_name }}</div>
       <div class="text-2xl" v-if="currentGame.state === 'waiting'">
@@ -70,7 +70,7 @@ export default {
 
 <style lang="postcss" scoped>
 .team-name {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
 }
