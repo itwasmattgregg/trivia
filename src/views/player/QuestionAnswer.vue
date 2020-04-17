@@ -10,6 +10,7 @@
         id="answer"
         v-model="answer"
         placeholder="No answer is wrong, just like no question is stupid..."
+        @keydown.enter.prevent="submit"
       />
     </div>
     <div class="flex items-center justify-center">

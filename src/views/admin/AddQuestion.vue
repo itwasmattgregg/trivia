@@ -15,6 +15,7 @@
             id="question"
             v-model="question"
             placeholder="What is the meaning of life...?"
+            @keydown.enter.prevent="addQuestion"
           />
         </div>
         <div class="flex items-center justify-center">
