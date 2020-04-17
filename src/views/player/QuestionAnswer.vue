@@ -1,6 +1,7 @@
 <template>
   <div v-if="!submitted">
     <div class="text-5xl">{{ question.question }}</div>
+    <!-- Maybe make this a form so can be submitted from keyboard on mobile? -->
     <div class="mb-4 text-left">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="answer">
         Write your answer here
@@ -10,6 +11,7 @@
         id="answer"
         v-model="answer"
         placeholder="No answer is wrong, just like no question is stupid..."
+        rows="4"
         @keydown.enter.prevent="submit"
       />
     </div>
