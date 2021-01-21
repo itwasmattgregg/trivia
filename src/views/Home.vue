@@ -1,6 +1,6 @@
 <template>
   <div class="p-8">
-    <h1 class="text-2xl mb-4">Welcome to Nerdy Autocomplete!</h1>
+    <h1 class="text-2xl mb-4">Welcome to Trivia!</h1>
     <form @submit.prevent="login">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="hash">
         Login here
@@ -16,10 +16,8 @@
         {{ errorMessage }}
       </p>
       <button
-        :class="
-          `bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline
-            ${disabled && 'opacity-50'}`
-        "
+        :class="`bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline
+            ${disabled && 'opacity-50'}`"
         type="submit"
         :disabled="disabled"
       >
@@ -38,7 +36,7 @@ export default {
     return {
       teamHash: "",
       attempts: 0,
-      errorMessage: ""
+      errorMessage: "",
     };
   },
   computed: {
@@ -48,7 +46,7 @@ export default {
       } else {
         return false;
       }
-    }
+    },
   },
   methods: {
     login() {
@@ -62,7 +60,7 @@ export default {
         .collectionGroup("Teams")
         .where("hash", "==", this.teamHash);
 
-      teams.get().then(querySnapshot => {
+      teams.get().then((querySnapshot) => {
         // If the query didn't find anything
         if (querySnapshot.empty) {
           this.errorMessage = "That's not a valid team ID...";
@@ -76,18 +74,18 @@ export default {
           let gameId = "";
           let teamId = "";
 
-          querySnapshot.forEach(function(doc) {
+          querySnapshot.forEach(function (doc) {
             gameId = doc.ref.parent.parent.id;
             teamId = doc.id;
           });
 
           this.$router.push({
             name: "team",
-            params: { gameId, teamId }
+            params: { gameId, teamId },
           });
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
