@@ -1,25 +1,3 @@
-# nerdy-autocomplete
-![Build and Deploy](https://github.com/JimSchofield/nerdery-autocomplete/workflows/Build%20and%20Deploy/badge.svg)
+# Real Time Trivia
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Deploy to Firebase Hosting](https://github.com/itwasmattgregg/trivia/workflows/Deploy%20to%20Firebase%20Hosting%20on%20merge/badge.svg)
